@@ -17,15 +17,13 @@
 // @match *://*brainly.com.br/*
 // @grant GM.addStyle
 // ==/UserScript==
-GM.addStyle(`
-.js-react-bottom-banner, .js-react-brainly-plus-box-aside, .sg-overlay, .brn-cookie-policy-wrapper, .section--3Yobl {
-  display: none;
+function clearLocalStorage() {
+
+    if (document.querySelector("div.sg-text--text-black") && document.querySelector("div.sg-text--text-black").textContent.toLowerCase().indexOf("out of free") != -1){
+        console.log("Brainly cookies cleared!");
+        localStorage.clear();
+        location.reload();
+    }
 }
 
-.brn-qpage-layout--aligned, .brn-qpage-layout {
-  grid-template-columns: 700px;
-}
-`);
-
-localStorage.setItem("flexible-funnel-last-access-data", 0);
-localStorage.setItem("flexible-funnel-cycle-start", 0);
+setInterval(clearLocalStorage, (1000));
